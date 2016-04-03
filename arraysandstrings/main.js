@@ -115,3 +115,43 @@ function compressString(str){
 
 console.log(compressString("aaabbbcdeff"));
 console.log(compressString("aabccccccccaaa"));
+
+//*********************************************************
+
+function zeroSpecificRowAndColumn(matrix,i,j){
+	var nRows = matrix.length;
+	var nCols = matrix[0].length;
+	for (var k=0;k<nRows;k++){
+		matrix[k][j] = 0;
+	}
+	for (var l=0;l<nCols;l++){
+		matrix[i][l] = 0;
+	}
+
+
+}
+
+function zeroRowsAndColumns(matrix){
+	var nRows = matrix.length;
+	var nCols = matrix[0].length;
+	var toBeZeroed = [];
+	for (var i=0;i<nRows;i++){
+		for (var j=0;j<nCols;j++){
+			var val = matrix[i][j];
+			if (val == 0){
+				toBeZeroed.push({rowIndex:i, colIndex:j})
+			}				
+		}
+	}
+	toBeZeroed.forEach(function(each){
+		zeroSpecificRowAndColumn(matrix, each.rowIndex, each.colIndex);
+	});
+	return matrix;
+
+}
+
+a = [[1,2,3],[2,3,4],[5,6,0],[7,8,9]];
+console.log(zeroRowsAndColumns(a));
+
+
+
