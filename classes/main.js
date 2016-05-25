@@ -2,6 +2,10 @@
 
 function Shape(){
 
+	this.move = function() {
+		console.log("Base: Shape moved");
+	}
+
 }
 
 Shape.prototype = {};
@@ -22,12 +26,12 @@ Shape.prototype.displayString = function() {
 
 
 function Circle(radius){
-	Shape.call(this);
+	Shape.apply(this, Array.prototype.slice.call(arguments));
 	this.radius = radius;
 }
 
 
-Circle.prototype = new Shape();
+Circle.prototype = Object.create(Shape.prototype);
 Circle.prototype.constructor = Circle;
 
 Circle.prototype.getArea = function() {
@@ -50,3 +54,4 @@ var circ = new Circle(3);
 console.log(circ.getPerimeter());
 console.log(circ.getArea());
 circ.displayString();
+circ.move();
