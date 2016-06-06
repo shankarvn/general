@@ -203,3 +203,39 @@ while(it.hasNext()){
 }
 console.log("*********************************************");
 
+
+
+//Level order iterator
+
+function levelOrder(root){
+	var evenStack = [];
+	var oddStack = [root];
+	while (oddStack.length || evenStack.length){
+		while (oddStack.length>0){
+			var pop = oddStack.pop();
+			console.log(pop.data);
+			if (pop.right){
+				evenStack.push(pop.right);
+			}
+			if (pop.left){
+				evenStack.push(pop.left);
+			}
+			
+		}
+		while (evenStack.length>0){
+			var pop = evenStack.pop();
+			console.log(pop.data);
+			if (pop.left){
+				oddStack.push(pop.left);
+			}
+			if (pop.right){
+				oddStack.push(pop.right);
+			}
+		}
+	}
+}
+
+levelOrder(root);
+
+
+
