@@ -5,17 +5,24 @@ function MinHeap(size){
 	this.end = 0;
 }
 
- MinHeap.prototype.print = function(root)
+MinHeap.prototype.print = function()
 {
-	var rootVal = this.getValue(root)
-    if (!this.isLeaf(root)){
-    	console.log(rootVal);
-    	this.print(this.getLeft(root));
-    	this.print(this.getRight(root));
-    }
-    else{
-    	console.log(rootVal);
-    }
+	var evenStack = [];
+	var oddStack = [0];
+	while (oddStack.length || evenStack.length){
+		while (oddStack.length>0){
+			var pop = oddStack.pop();
+			console.log(this.getValue(pop));
+			evenStack.push(this.getRight(pop));
+			evenStack.push(this.getLeft(pop));
+		}
+		while (evenStack.length>0){
+			var pop = evenStack.pop();
+			console.log(this.getValue(pop));
+			oddStack.push(this.getRight(pop));
+			oddStack.push(this.getLeft(pop));
+		}
+	}
 }
 
 MinHeap.prototype.getLeft = function(pos){
